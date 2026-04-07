@@ -4,12 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>K37B - Lớp 7B</title>
+
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
       background: linear-gradient(120deg, #667eea, #764ba2);
-      color: #fff;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     header {
@@ -18,11 +23,16 @@
       text-align: center;
     }
 
+    header h1 {
+      margin-bottom: 10px;
+    }
+
     nav a {
       color: white;
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
+      transition: 0.3s;
     }
 
     nav a:hover {
@@ -30,81 +40,85 @@
     }
 
     .container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 20px;
-      text-align: center;
     }
 
     .card {
-      background: rgba(255,255,255,0.1);
-      padding: 20px;
-      margin: 20px auto;
-      border-radius: 15px;
+      background: rgba(255,255,255,0.15);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
       max-width: 500px;
       backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      margin-bottom: 20px;
+      opacity: 0.9;
     }
 
     button {
-      padding: 10px 20px;
+      padding: 12px 25px;
       border: none;
       border-radius: 10px;
       background: #ffd700;
-      cursor: pointer;
       font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
     button:hover {
       background: #ffcc00;
+      transform: scale(1.05);
     }
 
     footer {
-      text-align: center;
-      padding: 10px;
       background: rgba(0,0,0,0.6);
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <h1>🏫 K37B - Lớp 7B</h1>
-  <nav>
-    <a href="#">Trang chủ</a>
-    <a href="#">Thành viên</a>
-    <a href="#">Hoạt động</a>
-  </nav>
-</header>
+  <header>
+    <h1>🏫 K37B - Lớp 7B</h1>
+    <nav>
+      <a href="#">Trang chủ</a>
+      <a href="#">Thành viên</a>
+      <a href="#">Hoạt động</a>
+    </nav>
+  </header>
 
-<div class="container">
-  <div class="card">
-    <h2>Chào mừng đến với lớp 7B 🎉</h2>
-    <p>Đây là website chính thức của K37B!</p>
-    <button onclick="showMsg()">Bấm vào đây 😎</button>
-    <p id="msg"></p>
+  <div class="container">
+    <div class="card">
+      <h2>Chào mừng đến với lớp 7B 🎉</h2>
+      <p>Đây là website chính thức của K37B!</p>
+      <button onclick="clickMe()">Bấm vào đây 😎</button>
+    </div>
   </div>
 
-  <div class="card">
-    <h3>📢 Thông báo</h3>
-    <p>Mai kiểm tra vở số 4 nhớ làm bài nhé!</p>
-  </div>
+  <footer>
+    © 2026 K37B - Lớp 7B 😎
+  </footer>
 
-  <div class="card">
-    <h3>👥 Thành viên</h3>
-    <p>Danh sách lớp sẽ cập nhật sau...</p>
-  </div>
-</div>
-
-<footer>
-  <p>© 2026 K37B - Lớp 7B 😎</p>
-</footer>
-
-<script>
-  function showMsg() {
-    document.getElementById("msg").innerHTML = "🔥 K37B mãi đỉnh! 🔥";
-  }
-</script>
+  <script>
+    function clickMe() {
+      alert("Hello K37B 😎🔥");
+    }
+  </script>
 
 </body>
 </html>
