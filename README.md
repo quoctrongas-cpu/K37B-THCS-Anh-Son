@@ -15,13 +15,32 @@
       overflow-x: hidden;
     }
 
-    header {
-      text-align:center;
-      padding:20px;
-    }
+    header { text-align:center; padding:20px; }
 
     h1 {
       text-shadow:0 0 10px #00f7ff,0 0 20px #00f7ff;
+    }
+
+    /* chữ chạy neon */
+    .marquee {
+      overflow:hidden;
+      white-space:nowrap;
+      box-sizing:border-box;
+      margin-top:10px;
+    }
+
+    .marquee span {
+      display:inline-block;
+      padding-left:100%;
+      animation: marquee 10s linear infinite;
+      font-weight:bold;
+      color:#00f7ff;
+      text-shadow:0 0 10px #00f7ff,0 0 20px #00f7ff;
+    }
+
+    @keyframes marquee {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
     }
 
     nav button {
@@ -54,7 +73,7 @@
       background: rgba(255,255,255,0.1);
       padding:25px;
       border-radius:20px;
-      max-width:500px;
+      max-width:600px;
       margin:20px auto;
       text-align:center;
       box-shadow:0 0 20px rgba(0,247,255,0.3);
@@ -64,6 +83,26 @@
     .card:hover {
       transform: scale(1.03);
       box-shadow:0 0 30px #00f7ff;
+    }
+
+    /* gallery */
+    .gallery {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+      gap:10px;
+      margin-top:15px;
+    }
+
+    .gallery img {
+      width:100%;
+      border-radius:10px;
+      transition:0.3s;
+      cursor:pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+      box-shadow:0 0 15px #00f7ff;
     }
 
     input {
@@ -103,11 +142,13 @@
 
 <header>
   <h1>✨ K37B - Lớp 7B ✨</h1>
+  <div class="marquee"><span>🔥 Chào mừng đến với website lớp 7B siêu xịn 🔥</span></div>
   <nav>
     <button onclick="show('home')">Trang chủ</button>
     <button onclick="show('members')">Thành viên</button>
     <button onclick="show('teachers')">Thầy cô</button>
     <button onclick="show('news')">Thông báo</button>
+    <button onclick="show('gallery')">Ảnh lớp</button>
     <button onclick="show('login')">Đăng nhập</button>
   </nav>
 </header>
@@ -141,6 +182,18 @@
     <h2>📢 Thông báo</h2>
     <p>Mai kiểm tra</p>
     <p>Thứ 6 lao động</p>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="card">
+    <h2>📸 Ảnh lớp</h2>
+    <div class="gallery">
+      <img src="https://picsum.photos/200?1">
+      <img src="https://picsum.photos/200?2">
+      <img src="https://picsum.photos/200?3">
+      <img src="https://picsum.photos/200?4">
+    </div>
   </div>
 </section>
 
@@ -204,7 +257,5 @@
   },30);
 </script>
 
-</body>
-</html>
 </body>
 </html>
