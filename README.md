@@ -21,27 +21,49 @@
     }
 
     h1 {
-      text-shadow:0 0 10px #00f7ff;
+      text-shadow:0 0 10px #00f7ff,0 0 20px #00f7ff;
     }
 
     nav button {
       margin:5px;
-      padding:10px;
+      padding:10px 15px;
       border:none;
       border-radius:10px;
       cursor:pointer;
+      background: rgba(255,255,255,0.1);
+      color:white;
+      transition:0.3s;
     }
 
-    section { display:none; padding:20px; }
+    nav button:hover {
+      background:#00f7ff;
+      color:black;
+      transform: scale(1.1);
+      box-shadow:0 0 10px #00f7ff;
+    }
+
+    section { display:none; padding:20px; animation: fade 0.5s; }
     .active { display:block; }
+
+    @keyframes fade {
+      from {opacity:0; transform:translateY(20px)}
+      to {opacity:1; transform:translateY(0)}
+    }
 
     .card {
       background: rgba(255,255,255,0.1);
-      padding:20px;
-      border-radius:15px;
+      padding:25px;
+      border-radius:20px;
       max-width:500px;
       margin:20px auto;
       text-align:center;
+      box-shadow:0 0 20px rgba(0,247,255,0.3);
+      transition:0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow:0 0 30px #00f7ff;
     }
 
     input {
@@ -49,6 +71,22 @@
       margin:10px;
       border-radius:10px;
       border:none;
+      width:70%;
+    }
+
+    button.action {
+      padding:10px 20px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(45deg,#00f7ff,#00ff88);
+      cursor:pointer;
+      margin:5px;
+      transition:0.3s;
+    }
+
+    button.action:hover {
+      transform: scale(1.1);
+      box-shadow:0 0 15px #00f7ff;
     }
 
     canvas {
@@ -77,6 +115,7 @@
 <section id="home" class="active">
   <div class="card">
     <h2 id="hello">Chào mừng 😎</h2>
+    <p>Website siêu xịn của K37B 🔥</p>
   </div>
 </section>
 
@@ -85,6 +124,7 @@
     <h2>👥 Thành viên</h2>
     <p>Trọng 😎</p>
     <p>Nguyễn Văn A</p>
+    <p>Trần Thị B</p>
   </div>
 </section>
 
@@ -92,6 +132,7 @@
   <div class="card">
     <h2>👩‍🏫 Thầy cô</h2>
     <p>Thầy chủ nhiệm</p>
+    <p>Cô Toán</p>
   </div>
 </section>
 
@@ -99,6 +140,7 @@
   <div class="card">
     <h2>📢 Thông báo</h2>
     <p>Mai kiểm tra</p>
+    <p>Thứ 6 lao động</p>
   </div>
 </section>
 
@@ -107,8 +149,8 @@
     <h2>🔐 Đăng nhập</h2>
     <input id="name" placeholder="Nhập tên">
     <br>
-    <button onclick="saveName()">Lưu</button>
-    <button onclick="logout()">Xoá</button>
+    <button class="action" onclick="saveName()">Lưu</button>
+    <button class="action" onclick="logout()">Xoá</button>
   </div>
 </section>
 
@@ -127,7 +169,7 @@
   function loadName(){
     const name = localStorage.getItem('user');
     if(name){
-      document.getElementById('hello').innerText = 'Xin chào ' + name + ' 😎';
+      document.getElementById('hello').innerText = 'Xin chào ' + name + ' 😎✨';
     }
   }
 
@@ -145,8 +187,8 @@
   c.height = window.innerHeight;
 
   let p = [];
-  for(let i=0;i<80;i++){
-    p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,d:Math.random()});
+  for(let i=0;i<100;i++){
+    p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,d:Math.random()+0.5});
   }
 
   setInterval(()=>{
@@ -162,5 +204,7 @@
   },30);
 </script>
 
+</body>
+</html>
 </body>
 </html>
