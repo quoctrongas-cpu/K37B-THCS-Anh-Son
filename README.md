@@ -1,139 +1,92 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>K37B - Lớp 7B</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K37B - Lớp 7B</title>
 
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Arial;
+  background: radial-gradient(circle,#1a1a2e,#16213e);
+  color:white;
+  overflow-x:hidden;
+}
 
-    body {
-      font-family: Arial;
-      background: radial-gradient(circle, #1a1a2e, #16213e);
-      color: white;
-      overflow-x: hidden;
-    }
+header{text-align:center;padding:20px}
+h1{text-shadow:0 0 10px #00f7ff,0 0 20px #00f7ff}
 
-    header { text-align:center; padding:20px; }
+.marquee{overflow:hidden;white-space:nowrap;margin-top:10px}
+.marquee span{
+  display:inline-block;
+  padding-left:100%;
+  animation:marquee 10s linear infinite;
+  color:#00f7ff;
+  text-shadow:0 0 10px #00f7ff;
+}
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-100%)}
+}
 
-    h1 {
-      text-shadow:0 0 10px #00f7ff,0 0 20px #00f7ff;
-    }
+nav button{
+  margin:5px;padding:10px;border:none;border-radius:10px;
+  cursor:pointer;background:rgba(255,255,255,0.1);
+  color:white;transition:.3s
+}
+nav button:hover{
+  background:#00f7ff;color:black;
+  transform:scale(1.1);
+}
 
-    /* chữ chạy neon */
-    .marquee {
-      overflow:hidden;
-      white-space:nowrap;
-      box-sizing:border-box;
-      margin-top:10px;
-    }
+section{display:none;padding:20px}
+.active{display:block}
 
-    .marquee span {
-      display:inline-block;
-      padding-left:100%;
-      animation: marquee 10s linear infinite;
-      font-weight:bold;
-      color:#00f7ff;
-      text-shadow:0 0 10px #00f7ff,0 0 20px #00f7ff;
-    }
+.card{
+  background:rgba(255,255,255,0.1);
+  padding:20px;
+  border-radius:20px;
+  max-width:700px;
+  margin:20px auto;
+  text-align:center;
+}
 
-    @keyframes marquee {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-100%, 0); }
-    }
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.gallery img{width:100%;border-radius:10px;cursor:pointer}
 
-    nav button {
-      margin:5px;
-      padding:10px 15px;
-      border:none;
-      border-radius:10px;
-      cursor:pointer;
-      background: rgba(255,255,255,0.1);
-      color:white;
-      transition:0.3s;
-    }
+.member{padding:10px;border-bottom:1px solid #555;cursor:pointer}
+.member:hover{background:#00f7ff;color:black}
 
-    nav button:hover {
-      background:#00f7ff;
-      color:black;
-      transform: scale(1.1);
-      box-shadow:0 0 10px #00f7ff;
-    }
+.chat{max-height:200px;overflow:auto;text-align:left}
 
-    section { display:none; padding:20px; animation: fade 0.5s; }
-    .active { display:block; }
+#lightbox{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:black;display:none;align-items:center;justify-content:center
+}
+#lightbox img{max-width:90%}
 
-    @keyframes fade {
-      from {opacity:0; transform:translateY(20px)}
-      to {opacity:1; transform:translateY(0)}
-    }
+input{padding:10px;border-radius:10px;border:none;margin:10px}
+button.action{padding:10px 20px;border:none;border-radius:10px;background:linear-gradient(45deg,#00f7ff,#00ff88)}
 
-    .card {
-      background: rgba(255,255,255,0.1);
-      padding:25px;
-      border-radius:20px;
-      max-width:600px;
-      margin:20px auto;
-      text-align:center;
-      box-shadow:0 0 20px rgba(0,247,255,0.3);
-      transition:0.3s;
-    }
+.light{background:white;color:black}
 
-    .card:hover {
-      transform: scale(1.03);
-      box-shadow:0 0 30px #00f7ff;
-    }
+canvas{position:fixed;top:0;left:0;z-index:-1}
 
-    /* gallery */
-    .gallery {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
-      gap:10px;
-      margin-top:15px;
-    }
-
-    .gallery img {
-      width:100%;
-      border-radius:10px;
-      transition:0.3s;
-      cursor:pointer;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.1);
-      box-shadow:0 0 15px #00f7ff;
-    }
-
-    input {
-      padding:10px;
-      margin:10px;
-      border-radius:10px;
-      border:none;
-      width:70%;
-    }
-
-    button.action {
-      padding:10px 20px;
-      border:none;
-      border-radius:10px;
-      background:linear-gradient(45deg,#00f7ff,#00ff88);
-      cursor:pointer;
-      margin:5px;
-      transition:0.3s;
-    }
-
-    button.action:hover {
-      transform: scale(1.1);
-      box-shadow:0 0 15px #00f7ff;
-    }
-
-    canvas {
-      position:fixed;
-      top:0; left:0;
-      z-index:-1;
-    }
-  </style>
+/* profile popup */
+#profileBox{
+position:fixed;
+top:50%;left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+padding:20px;
+border-radius:15px;
+display:none;
+z-index:999;
+box-shadow:0 0 20px #00f7ff;
+text-align:center;
+}
+</style>
 </head>
 
 <body>
@@ -141,120 +94,160 @@
 <canvas id="bg"></canvas>
 
 <header>
-  <h1>✨ K37B - Lớp 7B ✨</h1>
-  <div class="marquee"><span>🔥 Chào mừng đến với website lớp 7B siêu xịn 🔥</span></div>
-  <nav>
-    <button onclick="show('home')">Trang chủ</button>
-    <button onclick="show('members')">Thành viên</button>
-    <button onclick="show('teachers')">Thầy cô</button>
-    <button onclick="show('news')">Thông báo</button>
-    <button onclick="show('gallery')">Ảnh lớp</button>
-    <button onclick="show('login')">Đăng nhập</button>
-  </nav>
+<h1>✨ K37B - Lớp 7B ✨</h1>
+<div class="marquee"><span>🔥 Website lớp 7B siêu xịn 🔥</span></div>
+
+<nav>
+<button onclick="show('home')">Trang chủ</button>
+<button onclick="show('members')">Thành viên</button>
+<button onclick="show('teachers')">Thầy cô</button>
+<button onclick="show('news')">Thông báo</button>
+<button onclick="show('gallery')">Ảnh</button>
+<button onclick="show('chat')">Chat</button>
+<button onclick="show('login')">Đăng nhập</button>
+<button onclick="toggleMode()">🌙/☀️</button>
+</nav>
 </header>
 
 <section id="home" class="active">
-  <div class="card">
-    <h2 id="hello">Chào mừng 😎</h2>
-    <p>Website siêu xịn của K37B 🔥</p>
-  </div>
+<div class="card">
+<h2 id="hello">Chào mừng 😎</h2>
+</div>
 </section>
 
 <section id="members">
-  <div class="card">
-    <h2>👥 Thành viên</h2>
-    <p>Trọng 😎</p>
-    <p>Nguyễn Văn A</p>
-    <p>Trần Thị B</p>
-  </div>
+<div class="card">
+<h2>👥 Thành viên</h2>
+<div id="memberList"></div>
+</div>
 </section>
 
 <section id="teachers">
-  <div class="card">
-    <h2>👩‍🏫 Thầy cô</h2>
-    <p>Thầy chủ nhiệm</p>
-    <p>Cô Toán</p>
-  </div>
+<div class="card">
+<h2>👩‍🏫 Thầy cô</h2>
+<p>Thầy chủ nhiệm</p>
+<p>Cô Toán</p>
+</div>
 </section>
 
 <section id="news">
-  <div class="card">
-    <h2>📢 Thông báo</h2>
-    <p>Mai kiểm tra</p>
-    <p>Thứ 6 lao động</p>
-  </div>
+<div class="card">
+<h2>📢 Thông báo</h2>
+<p>Mai kiểm tra</p>
+</div>
 </section>
 
 <section id="gallery">
-  <div class="card">
-    <h2>📸 Ảnh lớp</h2>
-    <div class="gallery">
-      <img src="https://picsum.photos/200?1">
-      <img src="https://picsum.photos/200?2">
-      <img src="https://picsum.photos/200?3">
-      <img src="https://picsum.photos/200?4">
-    </div>
-  </div>
+<div class="card">
+<h2>📸 Ảnh lớp</h2>
+<div class="gallery">
+<img src="https://picsum.photos/200?1" onclick="zoom(this.src)">
+<img src="https://picsum.photos/200?2" onclick="zoom(this.src)">
+<img src="https://picsum.photos/200?3" onclick="zoom(this.src)">
+</div>
+</div>
+</section>
+
+<section id="chat">
+<div class="card">
+<div class="chat" id="chatBox"></div>
+<input id="msg" placeholder="nhập tin nhắn">
+<button class="action" onclick="send()">Gửi</button>
+</div>
 </section>
 
 <section id="login">
-  <div class="card">
-    <h2>🔐 Đăng nhập</h2>
-    <input id="name" placeholder="Nhập tên">
-    <br>
-    <button class="action" onclick="saveName()">Lưu</button>
-    <button class="action" onclick="logout()">Xoá</button>
-  </div>
+<div class="card">
+<h2>🔐 Đăng nhập</h2>
+<input id="name" placeholder="Tên">
+<button class="action" onclick="saveName()">Lưu</button>
+<button class="action" onclick="logout()">Xoá</button>
+</div>
 </section>
 
+<div id="lightbox" onclick="this.style.display='none'"><img id="lightImg"></div>
+
+<div id="profileBox">
+<h2 id="pName"></h2>
+<p id="pInfo"></p>
+<button onclick="closeProfile()">Đóng</button>
+</div>
+
 <script>
-  function show(id){
-    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
+function show(id){
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'))
+document.getElementById(id).classList.add('active')
+}
 
-  function saveName(){
-    const name = document.getElementById('name').value;
-    localStorage.setItem('user', name);
-    loadName();
-  }
+function zoom(src){
+document.getElementById('lightbox').style.display='flex'
+document.getElementById('lightImg').src=src
+}
 
-  function loadName(){
-    const name = localStorage.getItem('user');
-    if(name){
-      document.getElementById('hello').innerText = 'Xin chào ' + name + ' 😎✨';
-    }
-  }
+function toggleMode(){document.body.classList.toggle('light')}
 
-  function logout(){
-    localStorage.removeItem('user');
-    location.reload();
-  }
+function send(){
+let msg=document.getElementById('msg').value
+let box=document.getElementById('chatBox')
+box.innerHTML+=`<p>😎: ${msg}</p>`
+localStorage.setItem('chat',box.innerHTML)
+}
+if(localStorage.getItem('chat')){
+document.getElementById('chatBox').innerHTML=localStorage.getItem('chat')
+}
 
-  loadName();
+function saveName(){
+let name=document.getElementById('name').value
+localStorage.setItem('user',name)
+loadName()
+}
+function loadName(){
+let name=localStorage.getItem('user')
+if(name){document.getElementById('hello').innerText='Xin chào '+name+' 😎'}
+}
+function logout(){localStorage.removeItem('user');location.reload()}
+loadName()
 
-  // hiệu ứng rơi
-  const c = document.getElementById('bg');
-  const ctx = c.getContext('2d');
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
+// members + profile
+let list=document.getElementById('memberList')
+for(let i=1;i<=41;i++){
+let div=document.createElement('div')
+div.className='member'
+div.innerText='Thành viên '+i
 
-  let p = [];
-  for(let i=0;i<100;i++){
-    p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,d:Math.random()+0.5});
-  }
+div.onclick=()=>{
+document.getElementById('profileBox').style.display='block'
+document.getElementById('pName').innerText=div.innerText
+document.getElementById('pInfo').innerText='Lớp 7B - K37B 😎'
+}
 
-  setInterval(()=>{
-    ctx.clearRect(0,0,c.width,c.height);
-    ctx.fillStyle='white';
-    p.forEach(e=>{
-      ctx.beginPath();
-      ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
-      ctx.fill();
-      e.y+=e.d;
-      if(e.y>c.height){e.y=0;e.x=Math.random()*c.width}
-    });
-  },30);
+list.appendChild(div)
+}
+
+function closeProfile(){document.getElementById('profileBox').style.display='none'}
+
+// hiệu ứng rơi
+const c=document.getElementById('bg')
+const ctx=c.getContext('2d')
+c.width=window.innerWidth
+c.height=window.innerHeight
+
+let p=[]
+for(let i=0;i<100;i++){
+p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,d:Math.random()+0.5})
+}
+
+setInterval(()=>{
+ctx.clearRect(0,0,c.width,c.height)
+ctx.fillStyle='white'
+p.forEach(e=>{
+ctx.beginPath()
+ctx.arc(e.x,e.y,e.r,0,Math.PI*2)
+ctx.fill()
+e.y+=e.d
+if(e.y>c.height){e.y=0;e.x=Math.random()*c.width}
+})
+},30)
 </script>
 
 </body>
