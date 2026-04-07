@@ -87,7 +87,7 @@
 
   <div class="card">
     <h3>📢 Thông báo</h3>
-    <p>Mai kiểm tra Toán nhớ học bài nhé!</p>
+    <p>Mai kiểm tra vở số 4 nhớ làm bài nhé!</p>
   </div>
 
   <div class="card">
