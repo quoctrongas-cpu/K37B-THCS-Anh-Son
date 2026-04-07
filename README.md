@@ -10,7 +10,7 @@
 
     body {
       font-family: Arial, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
       background: radial-gradient(circle at top, #1a1a2e, #0f3460, #16213e);
       color: white;
     }
@@ -37,66 +37,47 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.3s;
+      cursor: pointer;
     }
 
-    nav a:hover {
-      color: #00f7ff;
-      text-shadow: 0 0 10px #00f7ff;
+    section {
+      display: none;
+      padding: 40px;
+      text-align: center;
     }
 
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 70vh;
+    .active {
+      display: block;
     }
 
     .card {
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.2);
       backdrop-filter: blur(15px);
-      padding: 40px;
+      padding: 30px;
       border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(0,247,255,0.3);
-      animation: float 3s ease-in-out infinite;
+      margin: 20px auto;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0,247,255,0.3);
     }
 
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    ul {
+      list-style: none;
+      margin-top: 15px;
     }
 
-    .card h2 {
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px #fff;
-    }
-
-    button {
-      margin-top: 20px;
-      padding: 12px 25px;
-      border: none;
+    li {
+      margin: 10px 0;
+      padding: 10px;
+      background: rgba(255,255,255,0.1);
       border-radius: 10px;
-      background: linear-gradient(45deg, #00f7ff, #00ff88);
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 20px #00f7ff;
     }
 
     footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
       text-align: center;
       padding: 10px;
       background: rgba(0,0,0,0.5);
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -108,71 +89,95 @@
 <header>
   <h1>✨ K37B - Lớp 7B ✨</h1>
   <nav>
-    <a href="#">Trang chủ</a>
-    <a href="#">Thành viên</a>
-    <a href="#">Hoạt động</a>
+    <a onclick="showPage('home')">Trang chủ</a>
+    <a onclick="showPage('members')">Thành viên</a>
+    <a onclick="showPage('teachers')">Thầy cô</a>
+    <a onclick="showPage('news')">Thông báo</a>
   </nav>
 </header>
 
-<div class="container">
+<!-- Trang chủ -->
+<section id="home" class="active">
   <div class="card">
-    <h2>Chào mừng đến với K37B 🎉</h2>
-    <p>Website siêu xịn của lớp 😎🔥</p>
-    <button onclick="clickMe()">Bấm thử đi 😏</button>
+    <h2>Chào mừng 🎉</h2>
+    <p>Website chính thức của K37B 😎</p>
   </div>
-</div>
+</section>
+
+<!-- Thành viên -->
+<section id="members">
+  <div class="card">
+    <h2>👥 Thành viên lớp</h2>
+    <ul>
+      <li>Trọng 😎</li>
+      <li>Nguyễn Văn A</li>
+      <li>Trần Thị B</li>
+      <li>Lê Văn C</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Thầy cô -->
+<section id="teachers">
+  <div class="card">
+    <h2>👩‍🏫 Thầy cô</h2>
+    <ul>
+      <li>Thầy chủ nhiệm</li>
+      <li>Cô Toán</li>
+      <li>Cô Văn</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Thông báo -->
+<section id="news">
+  <div class="card">
+    <h2>📢 Thông báo</h2>
+    <ul>
+      <li>Mai kiểm tra Toán</li>
+      <li>Thứ 6 lao động</li>
+      <li>Nộp bài tập trước CN</li>
+    </ul>
+  </div>
+</section>
 
 <footer>
-  © 2026 K37B - Lớp 7B 😎
+  © 2026 K37B 😎
 </footer>
 
 <script>
-  function clickMe() {
-    alert("K37B mãi đỉnh 😎🔥");
+  function showPage(id) {
+    document.querySelectorAll('section').forEach(sec => {
+      sec.classList.remove('active');
+    });
+    document.getElementById(id).classList.add('active');
   }
 
-  // Hiệu ứng rơi rơi (particles)
+  // hiệu ứng rơi
   const canvas = document.getElementById('bg');
   const ctx = canvas.getContext('2d');
-
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
   let particles = [];
-
   for (let i = 0; i < 100; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 2,
-      d: Math.random() * 1
-    });
+    particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*2, d: Math.random() });
   }
 
   function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
     ctx.fillStyle = 'white';
-
     particles.forEach(p => {
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fill();
     });
-
-    update();
-  }
-
-  function update() {
     particles.forEach(p => {
       p.y += p.d;
-      if (p.y > canvas.height) {
-        p.y = 0;
-        p.x = Math.random() * canvas.width;
-      }
+      if(p.y > canvas.height){ p.y = 0; p.x = Math.random()*canvas.width; }
     });
   }
-
-  setInterval(draw, 30);
+  setInterval(draw,30);
 </script>
 
 </body>
