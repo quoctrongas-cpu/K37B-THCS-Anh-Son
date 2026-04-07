@@ -3,31 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website của Trọng</title>
+  <title>K37B - Lớp 7B</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(120deg, #74ebd5, #acb6e5);
-      color: #333;
+      background: linear-gradient(120deg, #667eea, #764ba2);
+      color: #fff;
     }
 
     header {
-      background: #222;
-      color: white;
-      padding: 15px;
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
       text-align: center;
     }
 
     nav a {
       color: white;
-      margin: 0 10px;
+      margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
     }
 
     nav a:hover {
-      color: #74ebd5;
+      color: #ffd700;
     }
 
     .container {
@@ -36,32 +35,31 @@
     }
 
     .card {
-      background: white;
+      background: rgba(255,255,255,0.1);
       padding: 20px;
       margin: 20px auto;
       border-radius: 15px;
-      max-width: 400px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      max-width: 500px;
+      backdrop-filter: blur(10px);
     }
 
     button {
       padding: 10px 20px;
       border: none;
       border-radius: 10px;
-      background: #74ebd5;
+      background: #ffd700;
       cursor: pointer;
       font-weight: bold;
     }
 
     button:hover {
-      background: #4ecdc4;
+      background: #ffcc00;
     }
 
     footer {
       text-align: center;
       padding: 10px;
-      background: #222;
-      color: white;
+      background: rgba(0,0,0,0.6);
       position: fixed;
       bottom: 0;
       width: 100%;
@@ -71,30 +69,40 @@
 <body>
 
 <header>
-  <h1>🌐 Website của Trọng</h1>
+  <h1>🏫 K37B - Lớp 7B</h1>
   <nav>
     <a href="#">Trang chủ</a>
-    <a href="#">Giới thiệu</a>
-    <a href="#">Liên hệ</a>
+    <a href="#">Thành viên</a>
+    <a href="#">Hoạt động</a>
   </nav>
 </header>
 
 <div class="container">
   <div class="card">
-    <h2>Xin chào 👋</h2>
-    <p>Đây là website đầu tiên của mình!</p>
-    <button onclick="changeText()">Bấm thử đi 😏</button>
-    <p id="demo"></p>
+    <h2>Chào mừng đến với lớp 7B 🎉</h2>
+    <p>Đây là website chính thức của K37B!</p>
+    <button onclick="showMsg()">Bấm vào đây 😎</button>
+    <p id="msg"></p>
+  </div>
+
+  <div class="card">
+    <h3>📢 Thông báo</h3>
+    <p>Mai kiểm tra Toán nhớ học bài nhé!</p>
+  </div>
+
+  <div class="card">
+    <h3>👥 Thành viên</h3>
+    <p>Danh sách lớp sẽ cập nhật sau...</p>
   </div>
 </div>
 
 <footer>
-  <p>© 2026 Trọng đẹp trai 😎</p>
+  <p>© 2026 K37B - Lớp 7B 😎</p>
 </footer>
 
 <script>
-  function changeText() {
-    document.getElementById("demo").innerHTML = "🔥 Bạn vừa bấm nút! Web này do Trọng làm đó!";
+  function showMsg() {
+    document.getElementById("msg").innerHTML = "🔥 K37B mãi đỉnh! 🔥";
   }
 </script>
 
