@@ -6,119 +6,174 @@
   <title>K37B - Lớp 7B</title>
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(120deg, #667eea, #764ba2);
+      overflow: hidden;
+      background: radial-gradient(circle at top, #1a1a2e, #0f3460, #16213e);
       color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
     }
 
     header {
-      background: rgba(0,0,0,0.6);
-      padding: 20px;
       text-align: center;
+      padding: 30px;
     }
 
-    header h1 {
-      margin-bottom: 10px;
+    h1 {
+      font-size: 40px;
+      text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
     }
 
     nav a {
-      color: white;
       margin: 0 15px;
+      color: white;
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
     }
 
     nav a:hover {
-      color: #ffd700;
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff;
     }
 
     .container {
-      flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      height: 70vh;
     }
 
     .card {
-      background: rgba(255,255,255,0.15);
-      padding: 30px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(15px);
+      padding: 40px;
       border-radius: 20px;
       text-align: center;
-      width: 90%;
-      max-width: 500px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 0 30px rgba(0,247,255,0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
     .card h2 {
       margin-bottom: 10px;
-    }
-
-    .card p {
-      margin-bottom: 20px;
-      opacity: 0.9;
+      text-shadow: 0 0 10px #fff;
     }
 
     button {
+      margin-top: 20px;
       padding: 12px 25px;
       border: none;
       border-radius: 10px;
-      background: #ffd700;
+      background: linear-gradient(45deg, #00f7ff, #00ff88);
+      color: black;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
     }
 
     button:hover {
-      background: #ffcc00;
-      transform: scale(1.05);
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00f7ff;
     }
 
     footer {
-      background: rgba(0,0,0,0.6);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
       text-align: center;
-      padding: 15px;
-      font-size: 14px;
+      padding: 10px;
+      background: rgba(0,0,0,0.5);
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🏫 K37B - Lớp 7B</h1>
-    <nav>
-      <a href="#">Trang chủ</a>
-      <a href="#">Thành viên</a>
-      <a href="#">Hoạt động</a>
-    </nav>
-  </header>
+<canvas id="bg"></canvas>
 
-  <div class="container">
-    <div class="card">
-      <h2>Chào mừng đến với lớp 7B 🎉</h2>
-      <p>Đây là website chính thức của K37B!</p>
-      <button onclick="clickMe()">Bấm vào đây 😎</button>
-    </div>
+<header>
+  <h1>✨ K37B - Lớp 7B ✨</h1>
+  <nav>
+    <a href="#">Trang chủ</a>
+    <a href="#">Thành viên</a>
+    <a href="#">Hoạt động</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>Chào mừng đến với K37B 🎉</h2>
+    <p>Website siêu xịn của lớp 😎🔥</p>
+    <button onclick="clickMe()">Bấm thử đi 😏</button>
   </div>
+</div>
 
-  <footer>
-    © 2026 K37B - Lớp 7B 😎
-  </footer>
+<footer>
+  © 2026 K37B - Lớp 7B 😎
+</footer>
 
-  <script>
-    function clickMe() {
-      alert("Hello K37B 😎🔥");
-    }
-  </script>
+<script>
+  function clickMe() {
+    alert("K37B mãi đỉnh 😎🔥");
+  }
+
+  // Hiệu ứng rơi rơi (particles)
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  for (let i = 0; i < 100; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2,
+      d: Math.random() * 1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    update();
+  }
+
+  function update() {
+    particles.forEach(p => {
+      p.y += p.d;
+      if (p.y > canvas.height) {
+        p.y = 0;
+        p.x = Math.random() * canvas.width;
+      }
+    });
+  }
+
+  setInterval(draw, 30);
+</script>
 
 </body>
 </html>
