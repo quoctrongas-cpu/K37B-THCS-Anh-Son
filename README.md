@@ -6,78 +6,55 @@
   <title>K37B - Lớp 7B</title>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      font-family: Arial, sans-serif;
-      overflow-x: hidden;
-      background: radial-gradient(circle at top, #1a1a2e, #0f3460, #16213e);
+      font-family: Arial;
+      background: radial-gradient(circle, #1a1a2e, #16213e);
       color: white;
-    }
-
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
+      overflow-x: hidden;
     }
 
     header {
-      text-align: center;
-      padding: 30px;
+      text-align:center;
+      padding:20px;
     }
 
     h1 {
-      font-size: 40px;
-      text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+      text-shadow:0 0 10px #00f7ff;
     }
 
-    nav a {
-      margin: 0 15px;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      cursor: pointer;
+    nav button {
+      margin:5px;
+      padding:10px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
     }
 
-    section {
-      display: none;
-      padding: 40px;
-      text-align: center;
-    }
-
-    .active {
-      display: block;
-    }
+    section { display:none; padding:20px; }
+    .active { display:block; }
 
     .card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.2);
-      backdrop-filter: blur(15px);
-      padding: 30px;
-      border-radius: 20px;
-      margin: 20px auto;
-      max-width: 600px;
-      box-shadow: 0 0 20px rgba(0,247,255,0.3);
-    }
-
-    ul {
-      list-style: none;
-      margin-top: 15px;
-    }
-
-    li {
-      margin: 10px 0;
-      padding: 10px;
       background: rgba(255,255,255,0.1);
-      border-radius: 10px;
+      padding:20px;
+      border-radius:15px;
+      max-width:500px;
+      margin:20px auto;
+      text-align:center;
     }
 
-    footer {
-      text-align: center;
-      padding: 10px;
-      background: rgba(0,0,0,0.5);
-      margin-top: 30px;
+    input {
+      padding:10px;
+      margin:10px;
+      border-radius:10px;
+      border:none;
+    }
+
+    canvas {
+      position:fixed;
+      top:0; left:0;
+      z-index:-1;
     }
   </style>
 </head>
@@ -89,95 +66,100 @@
 <header>
   <h1>✨ K37B - Lớp 7B ✨</h1>
   <nav>
-    <a onclick="showPage('home')">Trang chủ</a>
-    <a onclick="showPage('members')">Thành viên</a>
-    <a onclick="showPage('teachers')">Thầy cô</a>
-    <a onclick="showPage('news')">Thông báo</a>
+    <button onclick="show('home')">Trang chủ</button>
+    <button onclick="show('members')">Thành viên</button>
+    <button onclick="show('teachers')">Thầy cô</button>
+    <button onclick="show('news')">Thông báo</button>
+    <button onclick="show('login')">Đăng nhập</button>
   </nav>
 </header>
 
-<!-- Trang chủ -->
 <section id="home" class="active">
   <div class="card">
-    <h2>Chào mừng 🎉</h2>
-    <p>Website chính thức của K37B 😎</p>
+    <h2 id="hello">Chào mừng 😎</h2>
   </div>
 </section>
 
-<!-- Thành viên -->
 <section id="members">
   <div class="card">
-    <h2>👥 Thành viên lớp</h2>
-    <ul>
-      <li>Trọng 😎</li>
-      <li>Nguyễn Văn A</li>
-      <li>Trần Thị B</li>
-      <li>Lê Văn C</li>
-    </ul>
+    <h2>👥 Thành viên</h2>
+    <p>Trọng 😎</p>
+    <p>Nguyễn Văn A</p>
   </div>
 </section>
 
-<!-- Thầy cô -->
 <section id="teachers">
   <div class="card">
     <h2>👩‍🏫 Thầy cô</h2>
-    <ul>
-      <li>Thầy chủ nhiệm</li>
-      <li>Cô Toán</li>
-      <li>Cô Văn</li>
-    </ul>
+    <p>Thầy chủ nhiệm</p>
   </div>
 </section>
 
-<!-- Thông báo -->
 <section id="news">
   <div class="card">
     <h2>📢 Thông báo</h2>
-    <ul>
-      <li>Mai kiểm tra Toán</li>
-      <li>Thứ 6 lao động</li>
-      <li>Nộp bài tập trước CN</li>
-    </ul>
+    <p>Mai kiểm tra</p>
   </div>
 </section>
 
-<footer>
-  © 2026 K37B 😎
-</footer>
+<section id="login">
+  <div class="card">
+    <h2>🔐 Đăng nhập</h2>
+    <input id="name" placeholder="Nhập tên">
+    <br>
+    <button onclick="saveName()">Lưu</button>
+    <button onclick="logout()">Xoá</button>
+  </div>
+</section>
 
 <script>
-  function showPage(id) {
-    document.querySelectorAll('section').forEach(sec => {
-      sec.classList.remove('active');
-    });
+  function show(id){
+    document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
   }
 
+  function saveName(){
+    const name = document.getElementById('name').value;
+    localStorage.setItem('user', name);
+    loadName();
+  }
+
+  function loadName(){
+    const name = localStorage.getItem('user');
+    if(name){
+      document.getElementById('hello').innerText = 'Xin chào ' + name + ' 😎';
+    }
+  }
+
+  function logout(){
+    localStorage.removeItem('user');
+    location.reload();
+  }
+
+  loadName();
+
   // hiệu ứng rơi
-  const canvas = document.getElementById('bg');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  const c = document.getElementById('bg');
+  const ctx = c.getContext('2d');
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
 
-  let particles = [];
-  for (let i = 0; i < 100; i++) {
-    particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*2, d: Math.random() });
+  let p = [];
+  for(let i=0;i<80;i++){
+    p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2,d:Math.random()});
   }
 
-  function draw() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle = 'white';
-    particles.forEach(p => {
+  setInterval(()=>{
+    ctx.clearRect(0,0,c.width,c.height);
+    ctx.fillStyle='white';
+    p.forEach(e=>{
       ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
       ctx.fill();
+      e.y+=e.d;
+      if(e.y>c.height){e.y=0;e.x=Math.random()*c.width}
     });
-    particles.forEach(p => {
-      p.y += p.d;
-      if(p.y > canvas.height){ p.y = 0; p.x = Math.random()*canvas.width; }
-    });
-  }
-  setInterval(draw,30);
+  },30);
 </script>
 
 </body>
