@@ -24,11 +24,11 @@
                         handwriting: ['Dancing Script', 'cursive'],
                     },
                     colors: {
-                        paper: '#fdfbf7', // Màu giấy trắng kem
-                        paperDark: '#f4ece6', // Giấy sẫm màu
-                        ink: '#2c2925', // Màu mực đen
-                        inkLight: '#57534e', // Mực nhạt
-                        gold: '#b68d40', // Màu vàng đồng (Bookmark/Accent)
+                        paper: '#fdfbf7',
+                        paperDark: '#f4ece6',
+                        ink: '#2c2925',
+                        inkLight: '#57534e',
+                        gold: '#b68d40',
                         goldLight: '#dfc282',
                     }
                 }
@@ -37,7 +37,6 @@
     </script>
 
     <style>
-        /* Nền giấy tinh tế hiện đại */
         body {
             background-color: #fdfbf7;
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
@@ -45,7 +44,6 @@
             overflow-x: hidden;
         }
 
-        /* Khung viền tạp chí cho màn hình chính */
         .magazine-frame {
             position: absolute;
             top: 24px;
@@ -69,7 +67,6 @@
         .magazine-frame::before { top: 0; }
         .magazine-frame::after { bottom: 0; }
 
-        /* Chữ mờ nghệ thuật (Watermark) */
         .watermark {
             position: absolute;
             font-family: 'Playfair Display', serif;
@@ -82,7 +79,6 @@
             z-index: 0;
         }
 
-        /* Hiệu ứng Highlight đoạn văn */
         .text-highlight {
             background: linear-gradient(to right, rgba(182, 141, 64, 0.3) 50%, transparent 50%);
             background-size: 200% 100%;
@@ -93,7 +89,6 @@
             background-position: 0 0;
         }
 
-        /* Khung thẻ hiện đại pha nét tạp chí */
         .editorial-card {
             background: #ffffff;
             border: 1px solid rgba(44, 41, 37, 0.08);
@@ -101,7 +96,6 @@
             transition: all 0.4s ease;
             position: relative;
         }
-        /* Viền vàng nổi lên khi hover */
         .editorial-card::before {
             content: '';
             position: absolute;
@@ -123,7 +117,6 @@
             transform: scaleX(1);
         }
 
-        /* Hiệu ứng khung ảnh Polaroid sạch sẽ */
         .modern-polaroid {
             background: #ffffff;
             padding: 12px 12px 45px 12px;
@@ -133,7 +126,6 @@
             break-inside: avoid;
             position: relative;
         }
-        /* Đinh ghim ảo (Trang trí) */
         .modern-polaroid::before {
             content: '';
             position: absolute;
@@ -154,7 +146,6 @@
             border-color: rgba(182, 141, 64, 0.2);
         }
 
-        /* Drop Cap hiện đại */
         .drop-cap::first-letter {
             float: left;
             font-family: 'Playfair Display', serif;
@@ -166,7 +157,6 @@
             font-weight: 900;
         }
 
-        /* Dấu gạch phân cách nghệ thuật */
         .ornament-divider {
             display: flex;
             align-items: center;
@@ -187,7 +177,6 @@
             transform: rotate(45deg);
         }
 
-        /* Hiệu ứng xuất hiện mượt mà */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -198,7 +187,6 @@
             transform: translateY(0);
         }
 
-        /* Slideshow mượt mà */
         .slide {
             position: absolute;
             inset: 0;
@@ -213,7 +201,6 @@
             transform: scale(1);
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f4ece6; }
         ::-webkit-scrollbar-thumb { background: #b68d40; border-radius: 10px; }
@@ -221,24 +208,24 @@
 </head>
 <body class="font-sans antialiased relative selection:bg-gold selection:text-white">
 
-    <!-- THANH ĐIỀU HƯỚNG HIỆN ĐẠI -->
+    <!-- THANH TIẾN TRÌNH CUỘN (SCROLL PROGRESS BAR) MỚI THÊM -->
+    <div class="fixed top-0 left-0 w-full h-1.5 z-[200] bg-transparent">
+        <div class="h-full bg-gradient-to-r from-goldLight to-gold w-0 rounded-r-full" id="scroll-progress"></div>
+    </div>
+
+    <!-- THANH ĐIỀU HƯỚNG -->
     <nav class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 py-6" id="navbar">
         <div class="max-w-7xl mx-auto px-6 lg:px-12">
             <div class="flex justify-between items-center pb-4 transition-all duration-300" id="nav-border">
                 <div class="flex items-center gap-4 cursor-pointer group" onclick="window.scrollTo(0,0)">
                     
-                    <!-- LOGO MỚI THIẾT KẾ CHO 7B -->
-                    <div class="relative w-11 h-11 flex items-center justify-center">
-                        <!-- Hình thoi xoay -->
+                    <div class="relative w-11 h-11 flex items-center justify-center mt-1">
                         <div id="nav-logo-diamond" class="absolute inset-0 border-[1.5px] border-white rotate-45 group-hover:rotate-90 transition-all duration-700 ease-in-out"></div>
-                        <!-- Vòng tròn bao ngoài -->
                         <div id="nav-logo-circle" class="absolute inset-[-4px] border border-white/50 rounded-full scale-90 group-hover:scale-105 transition-all duration-700 ease-in-out"></div>
-                        <!-- Chữ 7B -->
                         <span id="nav-logo-text" class="font-serif font-bold text-lg text-white z-10 transition-colors duration-500">7B</span>
                     </div>
 
                     <div class="flex flex-col ml-1">
-                        <!-- Bỏ chữ "Anh Sơn" -->
                         <span class="font-serif font-bold text-2xl text-white tracking-widest leading-none uppercase transition-colors" id="nav-brand">K37B</span>
                         <span class="text-[10px] text-goldLight font-bold uppercase tracking-[0.2em] mt-1.5 transition-colors" id="nav-sub">Chương Nhạc Thanh Xuân</span>
                     </div>
@@ -253,7 +240,7 @@
                     <a href="#gallery" class="nav-link text-white/90 text-sm uppercase tracking-widest font-semibold hover:text-gold transition-colors relative">Ký Ức</a>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none transition-colors">
+                <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none transition-colors mt-2">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
@@ -270,9 +257,8 @@
         </div>
     </nav>
 
-    <!-- TRANG CHỦ (SLIDESHOW HIỆN ĐẠI) -->
+    <!-- TRANG CHỦ -->
     <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <!-- Khung trang trí giả lập bìa tạp chí -->
         <div class="magazine-frame"></div>
 
         <div class="slideshow-container absolute inset-0 z-0">
@@ -281,7 +267,6 @@
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1920&q=80');"></div>
         </div>
 
-        <!-- Lớp phủ tối mờ để chữ trắng nổi bật -->
         <div class="absolute inset-0 z-10 bg-gradient-to-b from-ink/70 via-ink/40 to-ink/90"></div>
 
         <div class="relative z-20 text-center px-4 max-w-4xl mt-16">
@@ -308,15 +293,13 @@
         </div>
     </section>
 
-    <!-- LỜI TỰA (GIỚI THIỆU & THỐNG KÊ GRID) -->
+    <!-- LỜI TỰA -->
     <section id="about" class="py-32 relative overflow-hidden">
-        <!-- Chữ chìm trang trí -->
         <div class="watermark top-10 -left-10 text-[12rem] md:text-[20rem]">7B</div>
         <div class="watermark bottom-10 -right-10 text-[10rem] md:text-[15rem] text-gold/5">K37B</div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Bên trái: Text Editorial -->
                 <div class="reveal">
                     <p class="font-bold uppercase tracking-[0.3em] text-gold text-xs mb-4 flex items-center gap-2">
                         <span class="w-8 h-px bg-gold"></span> Chương 1
@@ -336,9 +319,7 @@
                     </div>
                 </div>
 
-                <!-- Bên phải: Grid Thống Kê -->
                 <div class="grid grid-cols-2 gap-6 reveal relative">
-                    <!-- Khung viền mờ chìm phía sau grid -->
                     <div class="absolute inset-0 border border-ink/5 translate-x-4 translate-y-4 -z-10 rounded-sm"></div>
 
                     <div class="editorial-card p-10 text-center rounded-sm">
@@ -364,9 +345,8 @@
         </div>
     </section>
 
-    <!-- NHÂN VẬT (BAN CÁN SỰ GRID) -->
+    <!-- NHÂN VẬT -->
     <section id="members" class="py-32 bg-paperDark relative border-y border-ink/5">
-        <!-- Text chìm -->
         <div class="watermark top-20 right-10 text-[8rem] text-ink/5">Lãnh Đạo</div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
@@ -380,9 +360,7 @@
                 </div>
             </div>
 
-            <!-- Lưới Ban cán sự -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Card 1 -->
                 <div class="editorial-card p-8 flex flex-col items-center text-center reveal rounded-sm group">
                     <div class="w-16 h-16 border border-ink/10 rounded-full flex items-center justify-center text-gold text-xl mb-6 bg-paperDark group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-all duration-500">
                         <i class="fas fa-crown"></i>
@@ -392,7 +370,6 @@
                     <p class="text-inkLight text-sm">Thủ lĩnh tài ba, ngọn hải đăng công tâm dẫn dắt 7B vững bước.</p>
                 </div>
 
-                <!-- Card 2 -->
                 <div class="editorial-card p-8 flex flex-col items-center text-center reveal rounded-sm group" style="transition-delay: 100ms;">
                     <div class="w-16 h-16 border border-ink/10 rounded-full flex items-center justify-center text-gold text-xl mb-6 bg-paperDark group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-all duration-500">
                         <i class="fas fa-star"></i>
@@ -402,7 +379,6 @@
                     <p class="text-inkLight text-sm">Cánh tay đắc lực, gánh vác trọng trách bằng sự tận tâm, chu đáo.</p>
                 </div>
 
-                <!-- Card 3 -->
                 <div class="editorial-card p-8 flex flex-col items-center text-center reveal rounded-sm group" style="transition-delay: 200ms;">
                     <div class="w-16 h-16 border border-ink/10 rounded-full flex items-center justify-center text-gold text-xl mb-6 bg-paperDark group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-all duration-500">
                         <i class="fas fa-book-open"></i>
@@ -412,7 +388,6 @@
                     <p class="text-inkLight text-sm">Nhà thông thái, tấm gương sáng trong hành trình chinh phục tri thức.</p>
                 </div>
 
-                <!-- Card 4 -->
                 <div class="editorial-card p-8 flex flex-col items-center text-center reveal rounded-sm group" style="transition-delay: 300ms;">
                     <div class="w-16 h-16 border border-ink/10 rounded-full flex items-center justify-center text-gold text-xl mb-6 bg-paperDark group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-all duration-500">
                         <i class="fas fa-leaf"></i>
@@ -425,9 +400,8 @@
         </div>
     </section>
 
-    <!-- GIÁO VIÊN (TEACHERS - BỔ SUNG MỚI) -->
+    <!-- GIÁO VIÊN -->
     <section id="teachers" class="py-32 bg-paper relative">
-        <!-- Text chìm -->
         <div class="watermark top-20 left-10 text-[8rem] text-ink/5">Thầy Cô</div>
 
         <div class="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
@@ -441,7 +415,6 @@
                 </div>
             </div>
 
-            <!-- GVCN Cô Hà -->
             <div class="editorial-card p-8 md:p-12 mb-12 reveal rounded-sm relative overflow-hidden group border border-gold/30">
                 <div class="absolute -right-16 -top-16 w-48 h-48 bg-gold/5 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                 <div class="flex flex-col md:flex-row items-center md:items-start gap-8">
@@ -458,9 +431,7 @@
                 </div>
             </div>
 
-            <!-- Các giáo viên bộ môn -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal">
-                
                 <div class="bg-white border border-ink/10 p-6 flex items-center gap-5 hover:border-gold hover:-translate-y-1 transition-all duration-300">
                     <div class="w-12 h-12 rounded-full bg-paperDark flex items-center justify-center text-gold text-lg shrink-0 border border-ink/5"><i class="fas fa-square-root-variable"></i></div>
                     <div>
@@ -540,12 +511,11 @@
                         <h4 class="font-serif font-bold text-lg text-ink">Thầy Hiền</h4>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- DÒNG THỜI GIAN (TIMELINE) -->
+    <!-- DÒNG THỜI GIAN -->
     <section id="timeline" class="py-32 bg-paperDark relative border-y border-ink/5">
         <div class="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
             <div class="text-center mb-20 reveal">
@@ -556,13 +526,9 @@
                 <div class="w-16 h-px bg-ink/20 mx-auto mt-6"></div>
             </div>
 
-            <!-- Bố cục Dòng Thời Gian Dọc -->
             <div class="relative border-l border-ink/20 ml-3 md:ml-6 pl-8 md:pl-12 space-y-16">
-                
-                <!-- Cột mốc 1 -->
                 <div class="relative reveal">
-                    <!-- Nút ghim trên timeline -->
-                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 bg-paper rounded-full border-4 border-gold"></div>
+                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 bg-paper rounded-full border-4 border-gold shadow-[0_0_0_4px_#f4ece6]"></div>
                     <p class="text-gold font-bold text-xs uppercase tracking-[0.2em] mb-2">Tháng 9/2023</p>
                     <h4 class="font-serif font-bold text-2xl text-ink mb-3">Tiếng Trống Khai Trường</h4>
                     <div class="editorial-card p-6 rounded-sm">
@@ -572,9 +538,8 @@
                     </div>
                 </div>
 
-                <!-- Cột mốc 2 -->
                 <div class="relative reveal">
-                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 bg-paper rounded-full border-4 border-gold"></div>
+                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 bg-paper rounded-full border-4 border-gold shadow-[0_0_0_4px_#f4ece6]"></div>
                     <p class="text-gold font-bold text-xs uppercase tracking-[0.2em] mb-2">Tháng 11/2023</p>
                     <h4 class="font-serif font-bold text-2xl text-ink mb-3">Tri Ân Người Lái Đò</h4>
                     <div class="editorial-card p-6 rounded-sm">
@@ -584,9 +549,8 @@
                     </div>
                 </div>
 
-                <!-- Cột mốc 3 -->
                 <div class="relative reveal">
-                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 bg-paper rounded-full border-4 border-gold"></div>
+                    <div class="absolute -left-[41px] md:-left-[57px] top-1 w-5 h-5 bg-paper rounded-full border-4 border-gold shadow-[0_0_0_4px_#f4ece6]"></div>
                     <p class="text-gold font-bold text-xs uppercase tracking-[0.2em] mb-2">Tháng 3/2024</p>
                     <h4 class="font-serif font-bold text-2xl text-ink mb-3">Hội Trại Thanh Xuân</h4>
                     <div class="editorial-card p-6 rounded-sm">
@@ -595,7 +559,6 @@
                         </p>
                     </div>
                 </div>
-
             </div>
             
             <div class="text-center mt-16 reveal">
@@ -604,7 +567,7 @@
         </div>
     </section>
 
-    <!-- KÝ ỨC (MASONRY GALLERY HIỆN ĐẠI) -->
+    <!-- KÝ ỨC -->
     <section id="gallery" class="py-32 bg-paper relative">
         <div class="watermark bottom-20 left-10 text-[6rem] text-gold/5">Kỷ Niệm</div>
 
@@ -619,10 +582,7 @@
                 <p class="text-inkLight font-handwriting text-2xl mt-4 md:mt-0 opacity-80">Lưu giữ nụ cười vĩnh cửu...</p>
             </div>
 
-            <!-- Bố cục dạng Lưới (Masonry) ngay ngắn -->
             <div class="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8 reveal">
-                
-                <!-- Khung ảnh 1 (Ảnh upload của người dùng) -->
                 <div class="modern-polaroid group">
                     <div class="overflow-hidden relative">
                         <img src="https://i.ibb.co/JFm2NYpd/image.jpg" class="w-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Tập thể lớp">
@@ -632,7 +592,6 @@
                     <p class="font-sans text-[10px] tracking-widest uppercase text-center mt-2 text-inkLight/60">Khoảnh khắc đáng nhớ</p>
                 </div>
 
-                <!-- Khung ảnh 2 -->
                 <div class="modern-polaroid group">
                     <div class="overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1511629091441-ee46146481b6?auto=format&fit=crop&w=600&q=80" class="w-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Góc học tập">
@@ -640,7 +599,6 @@
                     <p class="font-sans text-sm font-bold tracking-[0.2em] uppercase text-center mt-6 text-ink">Góc tri thức</p>
                 </div>
 
-                <!-- Khung ảnh 3 -->
                 <div class="modern-polaroid group">
                     <div class="overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80" class="w-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Nụ cười">
@@ -648,14 +606,12 @@
                     <p class="font-sans text-sm font-bold tracking-[0.2em] uppercase text-center mt-6 text-ink">Niềm vui</p>
                 </div>
 
-                <!-- Khung ảnh 4 -->
                 <div class="modern-polaroid group">
                     <div class="overflow-hidden relative">
                         <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=600&q=80" class="w-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Lớp học">
                     </div>
                     <p class="font-sans text-sm font-bold tracking-[0.2em] uppercase text-center mt-6 text-ink">Phòng học</p>
                 </div>
-
             </div>
         </div>
     </section>
@@ -686,7 +642,14 @@
 
     <!-- SCRIPTS -->
     <script>
-        // Hiệu ứng Typewriter trên nền Slider
+        // Cập nhật thanh Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        });
+
         const textArray = [
             "Viết tiếp những trang sử rạng rỡ...", 
             "Nơi mỗi cá tính là một vì tinh tú...", 
@@ -714,7 +677,6 @@
         }
         setTimeout(typeWriter, 1000);
 
-        // Chuyển slide
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         function nextSlide() {
@@ -724,7 +686,6 @@
         }
         setInterval(nextSlide, 7000);
 
-        // Đổi màu Navbar thông minh khi cuộn (Từ nền tối sang sáng)
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             const border = document.getElementById('nav-border');
@@ -733,7 +694,6 @@
             const links = document.querySelectorAll('.nav-link');
             const btn = document.getElementById('mobile-menu-btn');
             
-            // Xử lý logo
             const diamond = document.getElementById('nav-logo-diamond');
             const circle = document.getElementById('nav-logo-circle');
             const logoText = document.getElementById('nav-logo-text');
@@ -743,13 +703,11 @@
                 nav.classList.remove('py-6');
                 border.classList.add('border-ink/10');
                 
-                // Đổi chữ sang đen
                 brand.classList.replace('text-white', 'text-ink');
                 sub.classList.replace('text-goldLight', 'text-gold');
                 btn.classList.replace('text-white', 'text-ink');
                 links.forEach(l => l.classList.replace('text-white/90', 'text-inkLight'));
                 
-                // Đổi logo sang đen/vàng
                 diamond.classList.replace('border-white', 'border-gold');
                 circle.classList.replace('border-white/50', 'border-ink/20');
                 logoText.classList.replace('text-white', 'text-ink');
@@ -759,20 +717,17 @@
                 nav.classList.add('py-6');
                 border.classList.remove('border-ink/10');
                 
-                // Trả chữ về trắng (để nổi trên ảnh Slider)
                 brand.classList.replace('text-ink', 'text-white');
                 sub.classList.replace('text-gold', 'text-goldLight');
                 btn.classList.replace('text-ink', 'text-white');
                 links.forEach(l => l.classList.replace('text-inkLight', 'text-white/90'));
 
-                // Trả logo về trắng
                 diamond.classList.replace('border-gold', 'border-white');
                 circle.classList.replace('border-ink/20', 'border-white/50');
                 logoText.classList.replace('text-ink', 'text-white');
             }
         });
 
-        // Hưởng ứng cuộn (Reveal)
         function reveal() {
             document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('active');
@@ -781,7 +736,6 @@
         window.addEventListener('scroll', reveal);
         reveal(); 
 
-        // Mobile Menu
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
             document.getElementById('mobile-overlay').classList.toggle('hidden');
